@@ -264,7 +264,8 @@ public class JDBC {
 		    conn = DriverManager.getConnection(GOT_DB_URL, USER, PASS);
 		    System.out.println("Connected to database successfully!");
 		      
-		    System.out.println("Creating statement for traversal of length 1...");
+		    System.out.println("Creating statement for traversal " +
+		    "of length 1...");
 		    stmt = conn.createStatement();
 
 		    String sql = "SELECT a.inV FROM graph as a WHERE a.outV=" +
@@ -312,7 +313,8 @@ public class JDBC {
 		    conn = DriverManager.getConnection(GOT_DB_URL, USER, PASS);
 		    System.out.println("Connected to database successfully!");
 		      
-		    System.out.println("Creating statement for traversal of length 2...");
+		    System.out.println("Creating statement for traversal " +
+		    "of length 2...");
 		    stmt = conn.createStatement();
 
 		    String sql = "SELECT b.inV FROM graph as a, graph as b " +
