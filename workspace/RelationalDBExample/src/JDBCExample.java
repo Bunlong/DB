@@ -136,7 +136,6 @@ public class JDBCExample {
 		System.out.println("Goodbye!");
 	}//end selectDatabase
 	
-	   
 	public void createTable() {
 		Connection conn = null;
 		Statement stmt = null;
