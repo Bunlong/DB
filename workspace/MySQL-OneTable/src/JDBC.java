@@ -182,4 +182,172 @@ public class JDBC {
 			}
 		}	
 	}
+	
+	public void loadData() {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+		    Class.forName(JDBC_DRIVER);
+
+		    System.out.println("Connecting to database...");
+		    conn = DriverManager.getConnection(GOT_DB_URL, USER, PASS);
+		    System.out.println("Connected to database successfully!");
+		      
+		    System.out.println("Loading data...");
+		    stmt = conn.createStatement();
+		     
+		    String sql = "INSERT INTO graph " +
+		    "VALUES (0, 1)";
+		    stmt.executeUpdate(sql);
+		    sql = "INSERT INTO graph " +
+		    "VALUES (0, 2)";
+		    stmt.executeUpdate(sql);
+		    sql = "INSERT INTO graph " +
+		    "VALUES (0, 6)";
+		    stmt.executeUpdate(sql);
+		    sql = "INSERT INTO graph " +
+		    "VALUES (0, 7)";
+		    stmt.executeUpdate(sql);
+		    sql = "INSERT INTO graph " +
+		    "VALUES (0, 8)";
+		    stmt.executeUpdate(sql);
+		    sql = "INSERT INTO graph " +
+		    "VALUES (0, 9)";
+		    stmt.executeUpdate(sql);
+		    sql = "INSERT INTO graph " +
+		    "VALUES (0, 10)";
+		    stmt.executeUpdate(sql);
+		    sql = "INSERT INTO graph " +
+		    "VALUES (0, 12)";
+		    stmt.executeUpdate(sql);
+		    sql = "INSERT INTO graph " +
+		    "VALUES (0, 19)";
+		    stmt.executeUpdate(sql);
+		    sql = "INSERT INTO graph " +
+		    "VALUES (0, 25)";
+		    stmt.executeUpdate(sql);
+		    System.out.println("Data loaded successfully!");
+		}
+		catch (SQLException se) {
+		    se.printStackTrace();
+		}
+		catch (Exception e) {
+		    e.printStackTrace();
+		}
+		finally {
+			try {
+				if (stmt!=null)
+					conn.close();
+			}
+			catch (SQLException se) {
+		    }
+			try {
+				if (conn!=null)
+					conn.close();
+		    }
+			catch (SQLException se) {
+				se.printStackTrace();
+		    }
+		}
+	}
+	
+	// The number in the function name indicates
+	// the length of the traversal
+	
+	public void traverseGraph1(int root) {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+		    Class.forName(JDBC_DRIVER);
+
+		    System.out.println("Connecting to database...");
+		    conn = DriverManager.getConnection(GOT_DB_URL, USER, PASS);
+		    System.out.println("Connected to database successfully!");
+		      
+		    System.out.println("Creating statement for traversal of length 1...");
+		    stmt = conn.createStatement();
+
+		    String sql = "SELECT a.inV FROM graph as a WHERE a.outV=" +
+		    Integer.toString(root);
+		    ResultSet rs = stmt.executeQuery(sql);
+		    System.out.print("Visited vertices: ");
+		    while (rs.next()) {
+		    	int inV = rs.getInt("inV");
+
+		    	System.out.print(inV + " ");
+		    }
+		    System.out.println();
+		    rs.close();
+		}
+		catch (SQLException se) {
+			se.printStackTrace();
+		}
+		catch (Exception e) {
+		    e.printStackTrace();
+		}
+		finally {
+			try {
+				if (stmt!=null)
+					conn.close();
+			}
+			catch (SQLException se) {
+		    }
+			try {
+				if(conn!=null)
+					conn.close();
+			}
+			catch (SQLException se) {
+				se.printStackTrace();
+		    }
+		}
+	}
+	
+	public void traverseGraph2(int root) {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+		    Class.forName(JDBC_DRIVER);
+
+		    System.out.println("Connecting to database...");
+		    conn = DriverManager.getConnection(GOT_DB_URL, USER, PASS);
+		    System.out.println("Connected to database successfully!");
+		      
+		    System.out.println("Creating statement for traversal of length 2...");
+		    stmt = conn.createStatement();
+
+		    String sql = "SELECT b.inV FROM graph as a, graph as b " +
+		    "WHERE a.inV=b.outV AND a.outV=" +
+		    Integer.toString(root);
+		    ResultSet rs = stmt.executeQuery(sql);
+		    System.out.print("Visited vertices: ");
+		    while (rs.next()) {
+		    	int inV = rs.getInt("inV");
+
+		    	System.out.print(inV + " ");
+		    }
+		    System.out.println();
+		    rs.close();
+		}
+		catch (SQLException se) {
+			se.printStackTrace();
+		}
+		catch (Exception e) {
+		    e.printStackTrace();
+		}
+		finally {
+			try {
+				if (stmt!=null)
+					conn.close();
+			}
+			catch (SQLException se) {
+		    }
+			try {
+				if(conn!=null)
+					conn.close();
+			}
+			catch (SQLException se) {
+				se.printStackTrace();
+		    }
+		}
+	}
 }
