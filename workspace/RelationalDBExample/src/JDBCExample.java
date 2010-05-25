@@ -67,7 +67,7 @@ public class JDBCExample {
 			//STEP 3: Open a connection
 			System.out.println("Connecting to a selected database...");
 			conn = DriverManager.getConnection(STUDENTS_DB_URL, USER, PASS);
-			System.out.println("Connected database successfully...");
+			System.out.println("Connected to database successfully...");
 			
 			//STEP 4: Execute a query
 			System.out.println("Deleting database...");
@@ -113,7 +113,7 @@ public class JDBCExample {
 		    //STEP 3: Open a connection
 		    System.out.println("Connecting to a selected database...");
 		    conn = DriverManager.getConnection(STUDENTS_DB_URL, USER, PASS);
-		    System.out.println("Connected database successfully...");
+		    System.out.println("Connected to database successfully...");
 		}
 		catch (SQLException se)	{
 			//Handle errors for JDBC
@@ -146,7 +146,7 @@ public class JDBCExample {
 			//STEP 3: Open a connection
 			System.out.println("Connecting to a selected database...");
 			conn = DriverManager.getConnection(STUDENTS_DB_URL, USER, PASS);
-			System.out.println("Connected database successfully...");
+			System.out.println("Connected to database successfully...");
 	      
 			//STEP 4: Execute a query
 			System.out.println("Creating table in given database...");
@@ -199,7 +199,7 @@ public class JDBCExample {
 			//STEP 3: Open a connection
 			System.out.println("Connecting to a selected database...");
 			conn = DriverManager.getConnection(STUDENTS_DB_URL, USER, PASS);
-			System.out.println("Connected database successfully...");
+			System.out.println("Connected to database successfully...");
 	      
 			//STEP 4: Execute a query
 			System.out.println("Deleting table in given database...");
@@ -247,7 +247,7 @@ public class JDBCExample {
 		    //STEP 3: Open a connection
 		    System.out.println("Connecting to a selected database...");
 		    conn = DriverManager.getConnection(STUDENTS_DB_URL, USER, PASS);
-		    System.out.println("Connected database successfully...");
+		    System.out.println("Connected to database successfully...");
 		      
 		    //STEP 4: Execute a query
 		    System.out.println("Inserting records into the table...");
@@ -305,7 +305,7 @@ public class JDBCExample {
 		    //STEP 3: Open a connection
 		    System.out.println("Connecting to a selected database...");
 		    conn = DriverManager.getConnection(STUDENTS_DB_URL, USER, PASS);
-		    System.out.println("Connected database successfully...");
+		    System.out.println("Connected to database successfully...");
 		      
 		    //STEP 4: Execute a query
 		    System.out.println("Creating statement...");
@@ -366,7 +366,7 @@ public class JDBCExample {
 		    //STEP 3: Open a connection
 		    System.out.println("Connecting to a selected database...");
 		    conn = DriverManager.getConnection(STUDENTS_DB_URL, USER, PASS);
-		    System.out.println("Connected database successfully...");
+		    System.out.println("Connected to database successfully...");
 		      
 		    //STEP 4: Execute a query
 		    System.out.println("Creating statement...");
@@ -432,7 +432,7 @@ public class JDBCExample {
 			//STEP 3: Open a connection
 			System.out.println("Connecting to a selected database...");
 			conn = DriverManager.getConnection(STUDENTS_DB_URL, USER, PASS);
-			System.out.println("Connected database successfully...");
+			System.out.println("Connected to database successfully...");
 		      
 			//STEP 4: Execute a query
 			System.out.println("Creating statement...");
@@ -498,7 +498,7 @@ public class JDBCExample {
 			//STEP 3: Open a connection
 			System.out.println("Connecting to a selected database...");
 			conn = DriverManager.getConnection(STUDENTS_DB_URL, USER, PASS);
-			System.out.println("Connected database successfully...");
+			System.out.println("Connected to database successfully...");
 		      
 			//STEP 4: Execute a query
 			System.out.println("Creating statement...");
@@ -581,7 +581,7 @@ public class JDBCExample {
 			//STEP 3: Open a connection
 			System.out.println("Connecting to a selected database...");
 			conn = DriverManager.getConnection(STUDENTS_DB_URL, USER, PASS);
-		    System.out.println("Connected database successfully...");
+		    System.out.println("Connected to database successfully...");
 		      
 		    //STEP 4: Execute a query
 		    System.out.println("Creating statement...");
@@ -664,7 +664,7 @@ public class JDBCExample {
 			//STEP 3: Open a connection
 			System.out.println("Connecting to a selected database...");
 			conn = DriverManager.getConnection(STUDENTS_DB_URL, USER, PASS);
-			System.out.println("Connected database successfully...");
+			System.out.println("Connected to database successfully...");
 		      
 			//STEP 4: Execute a query
 			System.out.println("Creating statement...");
