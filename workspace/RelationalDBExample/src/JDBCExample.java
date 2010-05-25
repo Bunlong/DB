@@ -66,7 +66,7 @@ public class JDBCExample {
 
 			//STEP 3: Open a connection
 			System.out.println("Connecting to a selected database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			conn = DriverManager.getConnection(STUDENTS_DB_URL, USER, PASS);
 			System.out.println("Connected database successfully...");
 			
 			//STEP 4: Execute a query
