@@ -195,7 +195,9 @@ public class JDBC {
 		      
 		    System.out.println("Loading data...");
 		    stmt = conn.createStatement();
-		     
+		    
+		    // Length 1
+		    
 		    String sql = "INSERT INTO graph " +
 		    "VALUES (0, 1)";
 		    stmt.executeUpdate(sql);
@@ -226,6 +228,31 @@ public class JDBC {
 		    sql = "INSERT INTO graph " +
 		    "VALUES (0, 25)";
 		    stmt.executeUpdate(sql);
+		    
+		    // Length 2
+		    
+		    sql = "INSERT INTO graph " +
+		    "VALUES (1, 3)";
+		    stmt.executeUpdate(sql);
+		    
+		    // Length 3
+		    
+		    sql = "INSERT INTO graph " +
+		    "VALUES (3, 4)";
+		    stmt.executeUpdate(sql);
+		    
+		    // Length 4
+		    
+		    sql = "INSERT INTO graph " +
+		    "VALUES (4, 5)";
+		    stmt.executeUpdate(sql);
+		    
+		    // Length 5
+		    
+		    sql = "INSERT INTO graph " +
+		    "VALUES (5, 11)";
+		    stmt.executeUpdate(sql);
+		    
 		    System.out.println("Data loaded successfully!");
 		}
 		catch (SQLException se) {
@@ -245,6 +272,56 @@ public class JDBC {
 				if (conn!=null)
 					conn.close();
 		    }
+			catch (SQLException se) {
+				se.printStackTrace();
+		    }
+		}
+	}
+	
+	public void warmUpCache() {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+		    Class.forName(JDBC_DRIVER);
+
+		    System.out.println("Connecting to database...");
+		    conn = DriverManager.getConnection(GOT_DB_URL, USER, PASS);
+		    System.out.println("Connected to database successfully!");
+		      
+		    System.out.println("Warming up cache...");
+		    stmt = conn.createStatement();
+
+		    String sql = "SELECT * FROM graph";
+		    ResultSet rs = stmt.executeQuery(sql);
+		    
+		    // XXX: All of the results must be iterated through
+		    
+		    System.out.println("Edges of graph: ");
+		    while (rs.next()) {
+		    	int outV = rs.getInt("outV");
+		    	int inV = rs.getInt("inV");
+
+		    	System.out.println(outV + " --> " + inV);
+		    }
+		    rs.close();
+		}
+		catch (SQLException se) {
+			se.printStackTrace();
+		}
+		catch (Exception e) {
+		    e.printStackTrace();
+		}
+		finally {
+			try {
+				if (stmt!=null)
+					conn.close();
+			}
+			catch (SQLException se) {
+		    }
+			try {
+				if(conn!=null)
+					conn.close();
+			}
 			catch (SQLException se) {
 				se.printStackTrace();
 		    }
@@ -319,6 +396,158 @@ public class JDBC {
 
 		    String sql = "SELECT b.inV FROM graph as a, graph as b " +
 		    "WHERE a.inV=b.outV AND a.outV=" +
+		    Integer.toString(root);
+		    ResultSet rs = stmt.executeQuery(sql);
+		    System.out.print("Visited vertices: ");
+		    while (rs.next()) {
+		    	int inV = rs.getInt("inV");
+
+		    	System.out.print(inV + " ");
+		    }
+		    System.out.println();
+		    rs.close();
+		}
+		catch (SQLException se) {
+			se.printStackTrace();
+		}
+		catch (Exception e) {
+		    e.printStackTrace();
+		}
+		finally {
+			try {
+				if (stmt!=null)
+					conn.close();
+			}
+			catch (SQLException se) {
+		    }
+			try {
+				if(conn!=null)
+					conn.close();
+			}
+			catch (SQLException se) {
+				se.printStackTrace();
+		    }
+		}
+	}
+	
+	public void traverseGraph3(int root) {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+		    Class.forName(JDBC_DRIVER);
+
+		    System.out.println("Connecting to database...");
+		    conn = DriverManager.getConnection(GOT_DB_URL, USER, PASS);
+		    System.out.println("Connected to database successfully!");
+		      
+		    System.out.println("Creating statement for traversal " +
+		    "of length 3...");
+		    stmt = conn.createStatement();
+
+		    String sql = "SELECT c.inV FROM graph as a, graph as b, " +
+		    "graph as c WHERE a.inV=b.outV AND b.inV=c.outV AND a.outV=" +
+		    Integer.toString(root);
+		    ResultSet rs = stmt.executeQuery(sql);
+		    System.out.print("Visited vertices: ");
+		    while (rs.next()) {
+		    	int inV = rs.getInt("inV");
+
+		    	System.out.print(inV + " ");
+		    }
+		    System.out.println();
+		    rs.close();
+		}
+		catch (SQLException se) {
+			se.printStackTrace();
+		}
+		catch (Exception e) {
+		    e.printStackTrace();
+		}
+		finally {
+			try {
+				if (stmt!=null)
+					conn.close();
+			}
+			catch (SQLException se) {
+		    }
+			try {
+				if(conn!=null)
+					conn.close();
+			}
+			catch (SQLException se) {
+				se.printStackTrace();
+		    }
+		}
+	}
+	
+	public void traverseGraph4(int root) {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+		    Class.forName(JDBC_DRIVER);
+
+		    System.out.println("Connecting to database...");
+		    conn = DriverManager.getConnection(GOT_DB_URL, USER, PASS);
+		    System.out.println("Connected to database successfully!");
+		      
+		    System.out.println("Creating statement for traversal " +
+		    "of length 4...");
+		    stmt = conn.createStatement();
+
+		    String sql = "SELECT d.inV FROM graph as a, graph as b, " +
+		    "graph as c, graph as d WHERE a.inV=b.outV AND b.inV=c.outV " +
+		    "AND c.inV=d.outV AND a.outV=" +
+		    Integer.toString(root);
+		    ResultSet rs = stmt.executeQuery(sql);
+		    System.out.print("Visited vertices: ");
+		    while (rs.next()) {
+		    	int inV = rs.getInt("inV");
+
+		    	System.out.print(inV + " ");
+		    }
+		    System.out.println();
+		    rs.close();
+		}
+		catch (SQLException se) {
+			se.printStackTrace();
+		}
+		catch (Exception e) {
+		    e.printStackTrace();
+		}
+		finally {
+			try {
+				if (stmt!=null)
+					conn.close();
+			}
+			catch (SQLException se) {
+		    }
+			try {
+				if(conn!=null)
+					conn.close();
+			}
+			catch (SQLException se) {
+				se.printStackTrace();
+		    }
+		}
+	}
+	
+	public void traverseGraph5(int root) {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+		    Class.forName(JDBC_DRIVER);
+
+		    System.out.println("Connecting to database...");
+		    conn = DriverManager.getConnection(GOT_DB_URL, USER, PASS);
+		    System.out.println("Connected to database successfully!");
+		      
+		    System.out.println("Creating statement for traversal " +
+		    "of length 5...");
+		    stmt = conn.createStatement();
+
+		    String sql = "SELECT e.inV FROM graph as a, graph as b, " +
+		    "graph as c, graph as d, graph as e WHERE a.inV=b.outV " +
+		    "AND b.inV=c.outV AND c.inV=d.outV AND d.inV=e.outV AND a.outV=" +
 		    Integer.toString(root);
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Visited vertices: ");
