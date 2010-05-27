@@ -410,13 +410,13 @@ public class JDBC {
 		    String sql = "SELECT a.sink FROM edge AS a " + 
 		    "JOIN node AS b ON (a.source=b.id AND a.source=" +
 		    Integer.toString(root) +
-		    ")";
+		    ") JOIN node AS c ON (a.sink=c.id)";
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Visited vertices: ");
 		    while (rs.next()) {
-		    	int inV = rs.getInt("sink");
+		    	int sink = rs.getInt("sink");
 
-		    	System.out.print(inV + " ");
+		    	System.out.print(sink + " ");
 		    }
 		    System.out.println();
 		    rs.close();
@@ -457,16 +457,31 @@ public class JDBC {
 		    System.out.println("Creating statement for traversal " +
 		    "of length 2...");
 		    stmt = conn.createStatement();
+
+		    String sql = "SELECT a.sink FROM edge AS a " + 
+		    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+		    Integer.toString(root) +
+		    ") JOIN node AS c ON (a.sink=c.id)";
 		    
-		    String sql = "SELECT b.inV FROM graph as a, graph as b " +
-		    "WHERE a.inV=b.outV AND a.outV=" +
-		    Integer.toString(root);
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Visited vertices: ");
 		    while (rs.next()) {
-		    	int inV = rs.getInt("sink");
+		    	int sink = rs.getInt("sink");
 
-		    	System.out.print(inV + " ");
+		    	String sql1 = "SELECT a.sink FROM edge AS a " + 
+			    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+			    Integer.toString(sink) +
+			    ") JOIN node AS c ON (a.sink=c.id)";
+		    	
+		    	Statement stmt1 = null;
+		    	stmt1 = conn.createStatement();
+		    	ResultSet rs1 = stmt1.executeQuery(sql1);
+		    	
+		    	while (rs1.next()) {
+			    	int sink1 = rs1.getInt("sink");   	
+			    	System.out.print(sink1 + " ");
+		    	}
+		    	rs1.close();
 		    }
 		    System.out.println();
 		    rs.close();
@@ -508,15 +523,45 @@ public class JDBC {
 		    "of length 3...");
 		    stmt = conn.createStatement();
 
-		    String sql = "SELECT c.inV FROM graph as a, graph as b, " +
-		    "graph as c WHERE a.inV=b.outV AND b.inV=c.outV AND a.outV=" +
-		    Integer.toString(root);
+		    String sql = "SELECT a.sink FROM edge AS a " + 
+		    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+		    Integer.toString(root) +
+		    ") JOIN node AS c ON (a.sink=c.id)";
+		    
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Visited vertices: ");
 		    while (rs.next()) {
-		    	int inV = rs.getInt("inV");
+		    	int sink = rs.getInt("sink");
 
-		    	System.out.print(inV + " ");
+		    	String sql1 = "SELECT a.sink FROM edge AS a " + 
+			    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+			    Integer.toString(sink) +
+			    ") JOIN node AS c ON (a.sink=c.id)";
+		    	
+		    	Statement stmt1 = null;
+		    	stmt1 = conn.createStatement();
+		    	ResultSet rs1 = stmt1.executeQuery(sql1);
+		    	
+		    	while (rs1.next()) {
+			    	int sink1 = rs1.getInt("sink");
+			    	
+			    	String sql2 = "SELECT a.sink FROM edge AS a " + 
+				    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+				    Integer.toString(sink1) +
+				    ") JOIN node AS c ON (a.sink=c.id)";
+			    	
+			    	Statement stmt2 = null;
+			    	stmt2 = conn.createStatement();
+			    	ResultSet rs2 = stmt2.executeQuery(sql2);
+			    	
+			    	while (rs2.next()) {
+			    		int sink2 = rs2.getInt("sink");
+			    		
+			    		System.out.print(sink2 + " ");
+			    	}
+			    	rs2.close();
+		    	}
+		    	rs1.close();
 		    }
 		    System.out.println();
 		    rs.close();
@@ -558,19 +603,61 @@ public class JDBC {
 		    "of length 4...");
 		    stmt = conn.createStatement();
 
-		    String sql = "SELECT d.inV FROM graph as a, graph as b, " +
-		    "graph as c, graph as d WHERE a.inV=b.outV AND b.inV=c.outV " +
-		    "AND c.inV=d.outV AND a.outV=" +
-		    Integer.toString(root);
+		    String sql = "SELECT a.sink FROM edge AS a " + 
+		    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+		    Integer.toString(root) +
+		    ") JOIN node AS c ON (a.sink=c.id)";
+		    
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Visited vertices: ");
 		    while (rs.next()) {
-		    	int inV = rs.getInt("inV");
+		    	int sink = rs.getInt("sink");
 
-		    	System.out.print(inV + " ");
+		    	String sql1 = "SELECT a.sink FROM edge AS a " + 
+			    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+			    Integer.toString(sink) +
+			    ") JOIN node AS c ON (a.sink=c.id)";
+		    	
+		    	Statement stmt1 = null;
+		    	stmt1 = conn.createStatement();
+		    	ResultSet rs1 = stmt1.executeQuery(sql1);
+		    	
+		    	while (rs1.next()) {
+			    	int sink1 = rs1.getInt("sink");
+			    	
+			    	String sql2 = "SELECT a.sink FROM edge AS a " + 
+				    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+				    Integer.toString(sink1) +
+				    ") JOIN node AS c ON (a.sink=c.id)";
+			    	
+			    	Statement stmt2 = null;
+			    	stmt2 = conn.createStatement();
+			    	ResultSet rs2 = stmt2.executeQuery(sql2);
+			    	
+			    	while (rs2.next()) {
+			    		int sink2 = rs2.getInt("sink");
+			    		
+			    		String sql3 = "SELECT a.sink FROM edge AS a " + 
+					    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+					    Integer.toString(sink2) +
+					    ") JOIN node AS c ON (a.sink=c.id)";
+			    		
+			    		Statement stmt3 = null;
+				    	stmt3 = conn.createStatement();
+				    	ResultSet rs3 = stmt3.executeQuery(sql3);
+				    	
+				    	while (rs3.next()) {
+				    		int sink3 = rs3.getInt("sink");
+			    		
+				    		System.out.print(sink3 + " ");
+				    	}
+			    	}
+			    	rs2.close();
+		    	}
+		    	rs1.close();
 		    }
 		    System.out.println();
-		    rs.close();
+		    rs.close();    
 		}
 		catch (SQLException se) {
 			se.printStackTrace();
@@ -609,16 +696,71 @@ public class JDBC {
 		    "of length 5...");
 		    stmt = conn.createStatement();
 
-		    String sql = "SELECT e.inV FROM graph as a, graph as b, " +
-		    "graph as c, graph as d, graph as e WHERE a.inV=b.outV " +
-		    "AND b.inV=c.outV AND c.inV=d.outV AND d.inV=e.outV AND a.outV=" +
-		    Integer.toString(root);
+		    String sql = "SELECT a.sink FROM edge AS a " + 
+		    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+		    Integer.toString(root) +
+		    ") JOIN node AS c ON (a.sink=c.id)";
+		    
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Visited vertices: ");
 		    while (rs.next()) {
-		    	int inV = rs.getInt("inV");
+		    	int sink = rs.getInt("sink");
 
-		    	System.out.print(inV + " ");
+		    	String sql1 = "SELECT a.sink FROM edge AS a " + 
+			    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+			    Integer.toString(sink) +
+			    ") JOIN node AS c ON (a.sink=c.id)";
+		    	
+		    	Statement stmt1 = null;
+		    	stmt1 = conn.createStatement();
+		    	ResultSet rs1 = stmt1.executeQuery(sql1);
+		    	
+		    	while (rs1.next()) {
+			    	int sink1 = rs1.getInt("sink");
+			    	
+			    	String sql2 = "SELECT a.sink FROM edge AS a " + 
+				    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+				    Integer.toString(sink1) +
+				    ") JOIN node AS c ON (a.sink=c.id)";
+			    	
+			    	Statement stmt2 = null;
+			    	stmt2 = conn.createStatement();
+			    	ResultSet rs2 = stmt2.executeQuery(sql2);
+			    	
+			    	while (rs2.next()) {
+			    		int sink2 = rs2.getInt("sink");
+			    		
+			    		String sql3 = "SELECT a.sink FROM edge AS a " + 
+					    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+					    Integer.toString(sink2) +
+					    ") JOIN node AS c ON (a.sink=c.id)";
+			    		
+			    		Statement stmt3 = null;
+				    	stmt3 = conn.createStatement();
+				    	ResultSet rs3 = stmt3.executeQuery(sql3);
+				    	
+				    	while (rs3.next()) {
+				    		int sink3 = rs3.getInt("sink");
+				    		
+				    		String sql4 = "SELECT a.sink FROM edge AS a " + 
+						    "JOIN node AS b ON (a.source=b.id AND a.source=" +
+						    Integer.toString(sink3) +
+						    ") JOIN node AS c ON (a.sink=c.id)";
+				    		
+				    		Statement stmt4 = null;
+					    	stmt4 = conn.createStatement();
+					    	ResultSet rs4 = stmt4.executeQuery(sql4);
+					    	
+					    	while (rs4.next()) {
+					    		int sink4 = rs4.getInt("sink");
+				    		
+					    		System.out.print(sink4 + " ");
+					    	}
+				    	}
+			    	}
+			    	rs2.close();
+		    	}
+		    	rs1.close();
 		    }
 		    System.out.println();
 		    rs.close();
@@ -666,9 +808,9 @@ public class JDBC {
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Orphan nodes: ");
 		    while (rs.next()) {
-		    	int inV = rs.getInt("id");
+		    	int sink = rs.getInt("id");
 
-		    	System.out.print(inV + " ");
+		    	System.out.print(sink + " ");
 		    }
 		    System.out.println();
 		    rs.close();
@@ -716,9 +858,9 @@ public class JDBC {
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Nodes: ");
 		    while (rs.next()) {
-		    	int inV = rs.getInt("id");
+		    	int sink = rs.getInt("id");
 
-		    	System.out.print(inV + " ");
+		    	System.out.print(sink + " ");
 		    }
 		    System.out.println();
 		    rs.close();
@@ -766,9 +908,9 @@ public class JDBC {
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Nodes: ");
 		    while (rs.next()) {
-		    	int inV = rs.getInt("id");
+		    	int sink = rs.getInt("id");
 
-		    	System.out.print(inV + " ");
+		    	System.out.print(sink + " ");
 		    }
 		    System.out.println();
 		    rs.close();
@@ -816,9 +958,9 @@ public class JDBC {
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Nodes: ");
 		    while (rs.next()) {
-		    	int inV = rs.getInt("id");
+		    	int sink = rs.getInt("id");
 
-		    	System.out.print(inV + " ");
+		    	System.out.print(sink + " ");
 		    }
 		    System.out.println();
 		    rs.close();
@@ -867,9 +1009,9 @@ public class JDBC {
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Nodes: ");
 		    while (rs.next()) {
-		    	int inV = rs.getInt("id");
+		    	int sink = rs.getInt("id");
 
-		    	System.out.print(inV + " ");
+		    	System.out.print(sink + " ");
 		    }
 		    System.out.println();
 		    rs.close();
