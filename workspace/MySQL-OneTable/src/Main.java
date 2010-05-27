@@ -22,6 +22,8 @@ public class Main {
 		DB.warmUpCache();
 		System.out.println();
 		
+		ExecutionTimer t = new ExecutionTimer();
+		t.start();
 		DB.traverseGraph1(0);
 		System.out.println();
 		
@@ -36,8 +38,12 @@ public class Main {
 		
 		DB.traverseGraph5(0);
 		System.out.println();
+		t.end();
 	
 		DB.dropDatabase();
+		System.out.println();
+		
+		System.out.println("EXECUTION TIME:" + t.duration() + " ms");
 		System.out.println();
 	}
 }
