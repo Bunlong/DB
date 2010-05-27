@@ -22,9 +22,11 @@ public class Main {
 		DB.warmUpCache();
 		System.out.println();
 		
+		ExecutionTimer t = new ExecutionTimer();
+		t.start();
 		DB.traverseGraph1(0);
 		System.out.println();
-/*
+		
 		DB.traverseGraph2(0);
 		System.out.println();
 
@@ -33,10 +35,11 @@ public class Main {
 		
 		DB.traverseGraph4(0);
 		System.out.println();
-		
+
 		DB.traverseGraph5(0);
 		System.out.println();
-*/
+		t.end();
+
 		DB.findOrphans();
 		System.out.println();
 
@@ -53,6 +56,9 @@ public class Main {
 		System.out.println();
 
 		DB.dropDatabase();
+		System.out.println();
+		
+		System.out.println("EXECUTION TIME:" + t.duration() + " ms");
 		System.out.println();
 	}
 }
