@@ -345,7 +345,7 @@ public class JDBC {
 		    "of length 1...");
 		    stmt = conn.createStatement();
 
-		    String sql = "SELECT a.inV FROM graph as a WHERE a.outV=" +
+		    String sql = "SELECT a.inV FROM graph AS a WHERE a.outV=" +
 		    Integer.toString(root);
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Visited vertices: ");
@@ -394,7 +394,7 @@ public class JDBC {
 		    "of length 2...");
 		    stmt = conn.createStatement();
 
-		    String sql = "SELECT b.inV FROM graph as a, graph as b " +
+		    String sql = "SELECT b.inV FROM graph AS a, graph AS b " +
 		    "WHERE a.inV=b.outV AND a.outV=" +
 		    Integer.toString(root);
 		    ResultSet rs = stmt.executeQuery(sql);
@@ -444,8 +444,8 @@ public class JDBC {
 		    "of length 3...");
 		    stmt = conn.createStatement();
 
-		    String sql = "SELECT c.inV FROM graph as a, graph as b, " +
-		    "graph as c WHERE a.inV=b.outV AND b.inV=c.outV AND a.outV=" +
+		    String sql = "SELECT c.inV FROM graph AS a, graph AS b, " +
+		    "graph AS c WHERE a.inV=b.outV AND b.inV=c.outV AND a.outV=" +
 		    Integer.toString(root);
 		    ResultSet rs = stmt.executeQuery(sql);
 		    System.out.print("Visited vertices: ");
@@ -494,8 +494,8 @@ public class JDBC {
 		    "of length 4...");
 		    stmt = conn.createStatement();
 
-		    String sql = "SELECT d.inV FROM graph as a, graph as b, " +
-		    "graph as c, graph as d WHERE a.inV=b.outV AND b.inV=c.outV " +
+		    String sql = "SELECT d.inV FROM graph AS a, graph AS b, " +
+		    "graph AS c, graph AS d WHERE a.inV=b.outV AND b.inV=c.outV " +
 		    "AND c.inV=d.outV AND a.outV=" +
 		    Integer.toString(root);
 		    ResultSet rs = stmt.executeQuery(sql);
@@ -545,8 +545,8 @@ public class JDBC {
 		    "of length 5...");
 		    stmt = conn.createStatement();
 
-		    String sql = "SELECT e.inV FROM graph as a, graph as b, " +
-		    "graph as c, graph as d, graph as e WHERE a.inV=b.outV " +
+		    String sql = "SELECT e.inV FROM graph AS a, graph AS b, " +
+		    "graph AS c, graph AS d, graph AS e WHERE a.inV=b.outV " +
 		    "AND b.inV=c.outV AND c.inV=d.outV AND d.inV=e.outV AND a.outV=" +
 		    Integer.toString(root);
 		    ResultSet rs = stmt.executeQuery(sql);
