@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -209,111 +211,42 @@ public class JDBC {
 		    System.out.println("Loading data...");
 		    stmt = conn.createStatement();
 		    
-		    String sql = "INSERT INTO node " +
-		    "VALUES (0, 0)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (1, 1)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (2, 2)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (3, 3)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (4, 4)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (5, 5)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (6, 6)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (7, 7)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (8, 8)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (9, 0)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (10, 0)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (11, 11)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (12, 12)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (19, 19)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (25, 0)";
-		    stmt.executeUpdate(sql);
+		    // Load data from file
 		    
-		    // Length 1
+		    BufferedReader in = new BufferedReader(new FileReader("graph.txt"));
+		    String line = in.readLine();
+		    while (line != null && line.length() != 0) {
+		    	String[] a = line.split(" ");
+			    int id = Integer.parseInt(a[0]);
+			    int payload = Integer.parseInt(a[1]);
+			    
+			    stmt = conn.createStatement();
+			    String sql = "INSERT INTO node " +
+			    "VALUES (" +
+			    Integer.toString(id) +
+			    ", " +
+			    Integer.toString(payload) +
+			    ")";
+			    stmt.executeUpdate(sql);
+			    line = in.readLine();
+		    }
 		    
-		    sql = "INSERT INTO edge " +
-		    "VALUES (0, 1)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO edge " +
-		    "VALUES (0, 2)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO edge " +
-		    "VALUES (0, 6)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO edge " +
-		    "VALUES (0, 7)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO edge " +
-		    "VALUES (0, 8)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO edge " +
-		    "VALUES (0, 9)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO edge " +
-		    "VALUES (0, 10)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO edge " +
-		    "VALUES (0, 12)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO edge " +
-		    "VALUES (0, 19)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO node " +
-		    "VALUES (21, 21)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO edge " +
-		    "VALUES (0, 25)";
-		    stmt.executeUpdate(sql);
-		    
-		    // Length 2
-		    
-		    sql = "INSERT INTO edge " +
-		    "VALUES (1, 3)";
-		    stmt.executeUpdate(sql);
-		    
-		    // Length 3
-		    
-		    sql = "INSERT INTO edge " +
-		    "VALUES (3, 4)";
-		    stmt.executeUpdate(sql);
-		    
-		    // Length 4
-		    
-		    sql = "INSERT INTO edge " +
-		    "VALUES (4, 5)";
-		    stmt.executeUpdate(sql);
-		    
-		    // Length 5
-		    
-		    sql = "INSERT INTO edge " +
-		    "VALUES (5, 11)";
-		    stmt.executeUpdate(sql);
+		    line = in.readLine();
+		    while (line != null) {
+		    	String[] a = line.split(" ");
+			    int source = Integer.parseInt(a[0]);
+			    int sink = Integer.parseInt(a[1]);
+			    
+			    stmt = conn.createStatement();
+			    String sql = "INSERT INTO edge " +
+			    "VALUES (" +
+			    Integer.toString(source) +
+			    ", " +
+			    Integer.toString(sink) +
+			    ")";
+			    stmt.executeUpdate(sql);
+			    line = in.readLine();
+		    }
 		    
 		    System.out.println("Data loaded successfully!");
 		}
