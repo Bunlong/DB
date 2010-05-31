@@ -24,6 +24,7 @@ public class Main {
 		
 		ExecutionTimer t = new ExecutionTimer();
 		t.start();
+		
 		DB.traverseGraph1(0);
 		System.out.println();
 		
@@ -38,6 +39,7 @@ public class Main {
 
 		DB.traverseGraph5(0);
 		System.out.println();
+		
 		t.end();
 
 		DB.findOrphans();
