@@ -1,3 +1,4 @@
+import java.io.*;
 import java.sql.*;
 
 public class JDBC {
@@ -194,64 +195,26 @@ public class JDBC {
 		    System.out.println("Connected to database successfully!");
 		      
 		    System.out.println("Loading data...");
-		    stmt = conn.createStatement();
 		    
-		    // Length 1
+		    // Load data from file
 		    
-		    String sql = "INSERT INTO graph " +
-		    "VALUES (0, 1)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO graph " +
-		    "VALUES (0, 2)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO graph " +
-		    "VALUES (0, 6)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO graph " +
-		    "VALUES (0, 7)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO graph " +
-		    "VALUES (0, 8)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO graph " +
-		    "VALUES (0, 9)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO graph " +
-		    "VALUES (0, 10)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO graph " +
-		    "VALUES (0, 12)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO graph " +
-		    "VALUES (0, 19)";
-		    stmt.executeUpdate(sql);
-		    sql = "INSERT INTO graph " +
-		    "VALUES (0, 25)";
-		    stmt.executeUpdate(sql);
-		    
-		    // Length 2
-		    
-		    sql = "INSERT INTO graph " +
-		    "VALUES (1, 3)";
-		    stmt.executeUpdate(sql);
-		    
-		    // Length 3
-		    
-		    sql = "INSERT INTO graph " +
-		    "VALUES (3, 4)";
-		    stmt.executeUpdate(sql);
-		    
-		    // Length 4
-		    
-		    sql = "INSERT INTO graph " +
-		    "VALUES (4, 5)";
-		    stmt.executeUpdate(sql);
-		    
-		    // Length 5
-		    
-		    sql = "INSERT INTO graph " +
-		    "VALUES (5, 11)";
-		    stmt.executeUpdate(sql);
+		    BufferedReader in = new BufferedReader(new FileReader("graph.txt"));
+		    String line = in.readLine();
+		    while (line != null) {
+		    	String[] a = line.split(" ");
+			    int source = Integer.parseInt(a[0]);
+			    int sink = Integer.parseInt(a[1]);
+			    
+			    stmt = conn.createStatement();
+			    String sql = "INSERT INTO graph " +
+			    "VALUES (" +
+			    Integer.toString(source) +
+			    ", " +
+			    Integer.toString(sink) +
+			    ")";
+			    stmt.executeUpdate(sql);
+			    line = in.readLine();
+		    }
 		    
 		    System.out.println("Data loaded successfully!");
 		}
