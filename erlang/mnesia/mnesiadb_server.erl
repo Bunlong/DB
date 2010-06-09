@@ -1,4 +1,4 @@
--module(mnesia_server).
+-module(mnesiadb_server).
 -export([db/0, loop/0]).
 
 -record(usertable, {key,
@@ -13,7 +13,7 @@ db() ->
                          {attributes, record_info(fields, usertable)}]).
 
 loop() ->
-    register(mnesia_server, self()),
+    register(mnesiadb_server, self()),
     loop_aux().
 
 loop_aux() ->
