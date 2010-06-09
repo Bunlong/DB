@@ -28,6 +28,8 @@ public class DetsClient extends DB {
 
     private OtpNode node = null;
     private OtpMbox mBox = null;
+    private String user = "maria@artemis";
+    private String server = "detsdb_server";
 
     /**
      * Initialize any state for this DB.
@@ -43,7 +45,7 @@ public class DetsClient extends DB {
                                        mBox.self(),
                                        new OtpErlangAtom("init")
                                    });
-            mBox.send("detsdb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangTuple recTuple = (OtpErlangTuple) mBox.receive();
             OtpErlangAtom okAtom = new OtpErlangAtom("ok");
             OtpErlangAtom usertableAtom = new OtpErlangAtom("usertable");
@@ -72,7 +74,7 @@ public class DetsClient extends DB {
                                        mBox.self(),
                                        new OtpErlangAtom("cleanup")
                                    });
-            mBox.send("detsdb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangAtom recAtom = (OtpErlangAtom) mBox.receive();
             OtpErlangAtom okAtom = new OtpErlangAtom("ok");
             assert recAtom.equals(okAtom);
@@ -108,7 +110,7 @@ public class DetsClient extends DB {
                                        tableAtom,
                                        keyStr
                                    });
-            mBox.send("detsdb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangObject received = mBox.receive();
             OtpErlangAtom noneAtom = new OtpErlangAtom("none");
             if (received.equals(noneAtom))
@@ -169,7 +171,7 @@ public class DetsClient extends DB {
                                        keyStr,
                                        recCountInt
                                    });
-            mBox.send("detsdb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangList received = (OtpErlangList) mBox.receive();
             OtpErlangAtom noneAtom = new OtpErlangAtom("none");
             Iterator<OtpErlangObject> itr1 = received.iterator();
@@ -243,7 +245,7 @@ public class DetsClient extends DB {
                                        keyStr,
                                        new OtpErlangList(fields)
                                    });
-            mBox.send("detsdb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangAtom recAtom = (OtpErlangAtom) mBox.receive();
             OtpErlangAtom okAtom = new OtpErlangAtom("ok");
             assert recAtom.equals(okAtom);
@@ -291,7 +293,7 @@ public class DetsClient extends DB {
                                        keyStr,
                                        new OtpErlangList(fields)
                                    });
-            mBox.send("detsdb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangAtom recAtom = (OtpErlangAtom) mBox.receive();
             OtpErlangAtom okAtom = new OtpErlangAtom("ok");
             assert recAtom.equals(okAtom);
@@ -322,7 +324,7 @@ public class DetsClient extends DB {
                                        tableAtom,
                                        keyStr
                                    });
-            mBox.send("detsdb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangAtom recAtom = (OtpErlangAtom) mBox.receive();
             OtpErlangAtom okAtom = new OtpErlangAtom("ok");
             assert recAtom.equals(okAtom);

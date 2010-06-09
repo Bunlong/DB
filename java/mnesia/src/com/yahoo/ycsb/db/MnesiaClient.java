@@ -28,6 +28,8 @@ public class MnesiaClient extends DB {
 
     private OtpNode node = null;
     private OtpMbox mBox = null;
+    private String user = "maria@artemis";
+    private String server = "mnesiadb_server";
 
     /**
      * Initialize any state for this DB.
@@ -43,7 +45,7 @@ public class MnesiaClient extends DB {
                                        mBox.self(),
                                        new OtpErlangAtom("init")
                                    });
-            mBox.send("mnesiadb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangAtom recAtom = (OtpErlangAtom) mBox.receive();
             OtpErlangAtom okAtom = new OtpErlangAtom("ok");
             assert recAtom.equals(okAtom);
@@ -65,7 +67,7 @@ public class MnesiaClient extends DB {
                                        mBox.self(),
                                        new OtpErlangAtom("cleanup")
                                    });
-            mBox.send("mnesiadb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangAtom recAtom = (OtpErlangAtom) mBox.receive();
             OtpErlangAtom stoppedAtom = new OtpErlangAtom("stopped");
             assert recAtom.equals(stoppedAtom);
@@ -101,7 +103,7 @@ public class MnesiaClient extends DB {
                                        tableAtom,
                                        keyStr
                                    });
-            mBox.send("mnesiadb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangObject received = mBox.receive();
             OtpErlangAtom noneAtom = new OtpErlangAtom("none");
             if (received.equals(noneAtom))
@@ -162,7 +164,7 @@ public class MnesiaClient extends DB {
                                        keyStr,
                                        recCountInt
                                    });
-            mBox.send("mnesiadb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangList received = (OtpErlangList) mBox.receive();
             OtpErlangAtom noneAtom = new OtpErlangAtom("none");
             Iterator<OtpErlangObject> itr1 = received.iterator();
@@ -236,7 +238,7 @@ public class MnesiaClient extends DB {
                                        keyStr,
                                        new OtpErlangList(fields)
                                    });
-            mBox.send("mnesiadb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangAtom recAtom = (OtpErlangAtom) mBox.receive();
             OtpErlangAtom okAtom = new OtpErlangAtom("ok");
             assert recAtom.equals(okAtom);
@@ -284,7 +286,7 @@ public class MnesiaClient extends DB {
                                        keyStr,
                                        new OtpErlangList(fields)
                                    });
-            mBox.send("mnesiadb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangAtom recAtom = (OtpErlangAtom) mBox.receive();
             OtpErlangAtom okAtom = new OtpErlangAtom("ok");
             assert recAtom.equals(okAtom);
@@ -315,7 +317,7 @@ public class MnesiaClient extends DB {
                                        tableAtom,
                                        keyStr
                                    });
-            mBox.send("mnesiadb_server", "maria@artemis", msg);
+            mBox.send(server, user, msg);
             OtpErlangAtom recAtom = (OtpErlangAtom) mBox.receive();
             OtpErlangAtom okAtom = new OtpErlangAtom("ok");
             assert recAtom.equals(okAtom);
