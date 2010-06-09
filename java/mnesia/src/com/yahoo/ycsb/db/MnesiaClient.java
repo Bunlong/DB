@@ -60,21 +60,7 @@ public class MnesiaClient extends DB {
      * Called once per DB instance; there is one DB instance per client thread.
      */
     public void cleanup() throws DBException {
-        try {
-            OtpErlangTuple msg =
-                new OtpErlangTuple(
-                                   new OtpErlangObject[] {
-                                       mBox.self(),
-                                       new OtpErlangAtom("cleanup")
-                                   });
-            mBox.send(server, user, msg);
-            OtpErlangAtom recAtom = (OtpErlangAtom) mBox.receive();
-            OtpErlangAtom stoppedAtom = new OtpErlangAtom("stopped");
-            assert recAtom.equals(stoppedAtom);
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
+        return;
     }
 
     /**

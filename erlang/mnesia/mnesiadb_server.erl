@@ -20,8 +20,6 @@ loop_aux() ->
     receive
         {From, init} ->
             init(From);
-        {From, cleanup} ->
-            cleanup(From);
         {From, read, Table, Key} ->
             read(From, Table, Key);
         {From, scan, Table, Key, RecCount} ->
@@ -38,10 +36,6 @@ loop_aux() ->
 init(From) ->
     From ! mnesia:start(),
     io:format("INIT\n", []).
-
-cleanup(From) ->
-    From ! stopped,
-    io:format("CLEANUP\n", []).
 
 read(From, Table, Key) ->
     Msg =
