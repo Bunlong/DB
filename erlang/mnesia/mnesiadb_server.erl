@@ -6,8 +6,11 @@
                     field5, field6, field7, field8, field9}).
 
 db() ->
-    mnesia:create_schema([node()]),
     mnesia:start(),
+    %% XXX: cleanup
+    mnesia:delete_table(usertable),
+    mnesia:delete_schema([node()]),
+    mnesia:create_schema([node()]),
     mnesia:create_table(usertable,
                         [{disc_copies, [node()]},
                          {attributes, record_info(fields, usertable)}]).
@@ -59,8 +62,10 @@ scan_aux(Table, Key, RecCount) ->
             [] -> none;
             [Record] -> Record
         end,
-    NextKey = mnesia:dirty_next(Table, Key),
-    [Msg|scan_aux(Table, NextKey, RecCount - 1)].
+    case mnesia:dirty_next(Table, Key) of
+        '$end_of_table' -> [Msg];
+        NextKey -> [Msg|scan_aux(Table, NextKey, RecCount - 1)]
+    end.
 
 update(From, Table, Key, Fields) ->
     NewFields =
