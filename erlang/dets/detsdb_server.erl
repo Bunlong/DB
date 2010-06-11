@@ -2,7 +2,9 @@
 -export([db/0, loop/0]).
 
 db() ->
-    dets:open_file(usertable, []).
+    dets:open_file(usertable, []),
+    %% XXX: cleanup
+    ok = dets:delete_all_objects(usertable).
 
 loop() ->
     register(detsdb_server, self()),
