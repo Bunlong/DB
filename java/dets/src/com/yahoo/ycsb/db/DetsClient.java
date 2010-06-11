@@ -121,7 +121,7 @@ public class DetsClient extends DB {
                     while (itr.hasNext()) {
                         int i = Integer.parseInt(itr.next().substring(5));
                         String value =
-                            ((OtpErlangTuple) received).elementAt(i+1).toString();
+                            ((OtpErlangTuple) received).elementAt(i + 1).toString();
                         result.put(new String("field" + i), new String(value));
                     }
                 }
@@ -129,7 +129,7 @@ public class DetsClient extends DB {
                     int recArity = ((OtpErlangTuple) received).arity();
                     for (int i = 0; i < recArity - 1; i++) {
                         String value =
-                            ((OtpErlangTuple) received).elementAt(i+1).toString();
+                            ((OtpErlangTuple) received).elementAt(i + 1).toString();
                         result.put(new String("field" + i), new String(value));
                     }
                 }
@@ -186,7 +186,7 @@ public class DetsClient extends DB {
                         while (itr2.hasNext()) {
                             int i = Integer.parseInt(itr2.next().substring(5));
                             String value =
-                                ((OtpErlangTuple) recElem).elementAt(i+1).toString();
+                                ((OtpErlangTuple) recElem).elementAt(i + 1).toString();
                             tuple.put(new String("field" + i), new String(value));
                         }
                     }
@@ -194,7 +194,7 @@ public class DetsClient extends DB {
                         int recArity = ((OtpErlangTuple) recElem).arity();
                         for (int i = 0; i < recArity - 1; i++) {
                             String value =
-                                ((OtpErlangTuple) recElem).elementAt(i+1).toString();
+                                ((OtpErlangTuple) recElem).elementAt(i + 1).toString();
                             tuple.put(new String("field" + i), new String(value));
                         }
                     }

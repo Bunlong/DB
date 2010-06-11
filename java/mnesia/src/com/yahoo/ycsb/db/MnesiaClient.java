@@ -100,7 +100,7 @@ public class MnesiaClient extends DB {
                     while (itr.hasNext()) {
                         int i = Integer.parseInt(itr.next().substring(5));
                         String value =
-                            ((OtpErlangTuple) received).elementAt(i+2).toString();
+                            ((OtpErlangTuple) received).elementAt(i + 2).toString();
                         result.put(new String("field" + i), new String(value));
                     }
                 }
@@ -108,7 +108,7 @@ public class MnesiaClient extends DB {
                     int recArity = ((OtpErlangTuple) received).arity();
                     for (int i = 0; i < recArity - 2; i++) {
                         String value =
-                            ((OtpErlangTuple) received).elementAt(i+2).toString();
+                            ((OtpErlangTuple) received).elementAt(i + 2).toString();
                         result.put(new String("field" + i), new String(value));
                     }
                 }
@@ -165,7 +165,7 @@ public class MnesiaClient extends DB {
                         while (itr2.hasNext()) {
                             int i = Integer.parseInt(itr2.next().substring(5));
                             String value =
-                                ((OtpErlangTuple) recElem).elementAt(i+2).toString();
+                                ((OtpErlangTuple) recElem).elementAt(i + 2).toString();
                             tuple.put(new String("field" + i), new String(value));
                         }
                     }
@@ -173,7 +173,7 @@ public class MnesiaClient extends DB {
                         int recArity = ((OtpErlangTuple) recElem).arity();
                         for (int i = 0; i < recArity - 2; i++) {
                             String value =
-                                ((OtpErlangTuple) recElem).elementAt(i+2).toString();
+                                ((OtpErlangTuple) recElem).elementAt(i + 2).toString();
                             tuple.put(new String("field" + i), new String(value));
                         }
                     }
