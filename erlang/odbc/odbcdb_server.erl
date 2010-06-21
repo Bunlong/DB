@@ -78,7 +78,7 @@ scan(From, Conn, Table, Key, RecCount) ->
     {selected, ?Columns, Selection} = odbc:sql_query(Conn, Query),
     Msg =
         case Selection of
-            [] -> none;
+            [] -> [none];
             Tuples -> Tuples
         end,
     From ! Msg,
